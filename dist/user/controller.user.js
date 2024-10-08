@@ -15,9 +15,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
 const common_1 = require("@nestjs/common");
 const user_repository_1 = require("./user.repository");
+const create_user_1 = require("./dto/create.user");
 let UserController = class UserController {
-    constructor() {
-        this.repositoryUser = new user_repository_1.RepositoryUser();
+    constructor(repositoryUser) {
+        this.repositoryUser = repositoryUser;
     }
     async createUser(dataUser) {
         this.repositoryUser.salvar(dataUser);
@@ -32,7 +33,7 @@ __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [create_user_1.CreateUserDTO]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "createUser", null);
 __decorate([
@@ -42,6 +43,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "listUsers", null);
 exports.UserController = UserController = __decorate([
-    (0, common_1.Controller)('/usuarios')
+    (0, common_1.Controller)("/usuarios"),
+    __metadata("design:paramtypes", [user_repository_1.RepositoryUser])
 ], UserController);
 //# sourceMappingURL=controller.user.js.map
